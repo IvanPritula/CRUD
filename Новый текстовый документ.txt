@@ -1,0 +1,11 @@
+async getTasks(req, res, next) {
+    try {    
+      const limit = NUMBER(req.query.rows);
+      const page = NUmber(req.query.page);
+      const offset = Math.floor((page-1)*limit)
+      const tasks = await taskService.getTasks(limit,offset);
+      res.status(200).send({ data:tasks });//id: req.params.id
+    } catch (error) {
+        next(error);
+    }
+}
